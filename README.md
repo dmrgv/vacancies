@@ -1,2 +1,2 @@
 # vacancies
-Vacancies Service
+Vacancies Service Repository
