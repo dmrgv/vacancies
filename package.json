@@ -1,0 +1,30 @@
+{
+  "name": "vacancies",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "deploy": "node bin/checkEnv.cjs",
+    "start": "pm2 startOrRestart ecosystem.config.cjs",
+    "stop": "pm2 del ecosystem.config.cjs",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint --ext .js src/ --ignore-path .gitignore",
+    "prettier": "prettier --check src/."
+  },
+  "dependencies": {
+    "consola": "^2.15.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.9",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1"
+  }
+}
