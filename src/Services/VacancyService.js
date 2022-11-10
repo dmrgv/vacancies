@@ -20,7 +20,12 @@ class VacancyService {
     if (!vacancy._id) {
       throw new Error('не указан `id`')
     }
-    return await Vacancy.findByIdAndUpdate(vacancy._id, vacancy, { new: true })
+    let doc = await Vacancy.findById(vacancy._id)
+    if (!doc) {
+      throw new Error('вакансия не найдена ' + vacancy._id)
+    }
+    doc = Object.assign(doc, vacancy)
+    return doc.save()
   }
 
   async delete(id) {

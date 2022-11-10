@@ -12,6 +12,8 @@ const Vacancy = new mongoose.Schema(
   },
   {
     timestamps: true,
+    optimisticConcurrency: true,
+    versionKey: 'version',
   }
 )
 
