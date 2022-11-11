@@ -45,6 +45,24 @@ class VacancyController {
       next(e)
     }
   }
+
+  async activate(req, res, next) {
+    try {
+      const post = await VacancyService.setActive(req.body.id)
+      return res.json(post)
+    } catch (e) {
+      next(e)
+    }
+  }
+
+  async deactivate(req, res, next) {
+    try {
+      const post = await VacancyService.setActive(req.body.id, false)
+      return res.json(post)
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
 export default new VacancyController()

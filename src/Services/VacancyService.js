@@ -34,6 +34,13 @@ class VacancyService {
     }
     return await Vacancy.findByIdAndDelete(id)
   }
+
+  async setActive(id, active = true) {
+    if (!id) {
+      throw new Error('не указан `id`')
+    }
+    return await Vacancy.findByIdAndUpdate(id, { active }, { new: true })
+  }
 }
 
 export default new VacancyService()
