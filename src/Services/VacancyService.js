@@ -43,7 +43,8 @@ class VacancyService {
     if (!id) {
       throw new Error('не указан `id`')
     }
-    return Vacancy.findOne({ _id: id, active: true }).select({
+    return Vacancy.findOne({ _id: id, active: true })
+      .select({
         active: 0,
         version: 0,
         priority: 0,

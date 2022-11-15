@@ -17,4 +17,12 @@ const Vacancy = new mongoose.Schema(
   }
 )
 
+Vacancy.post('save', function (error, res, next) {
+  if (error.name === 'MongoServerError' && error.code === 11000) {
+    next({ message: { status: 'violations', violations: [{ code: error.code, message: 'Не дублируйте название вакансии!' }] } })
+  } else {
+    next()
+  }
+})
+
 export default mongoose.model('Vacancy', Vacancy)
