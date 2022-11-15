@@ -19,9 +19,27 @@ class VacancyController {
     }
   }
 
+  async getActive(req, res, next) {
+    try {
+      const posts = await VacancyService.getActive()
+      return res.json(posts)
+    } catch (e) {
+      next(e)
+    }
+  }
+
   async getOne(req, res, next) {
     try {
       const post = await VacancyService.getOne(req.body.id)
+      return res.json(post)
+    } catch (e) {
+      next(e)
+    }
+  }
+
+  async getDetails(req, res, next) {
+    try {
+      const post = await VacancyService.getDetails(req.body.id)
       return res.json(post)
     } catch (e) {
       next(e)

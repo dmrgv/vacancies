@@ -6,14 +6,50 @@ class VacancyService {
   }
 
   async getAll() {
-    return await Vacancy.find()
+    return Vacancy.find()
+      .sort([
+        ['priority', 'desc'],
+        ['name', 'asc'],
+      ])
+      .select({
+        responsibilities: 0,
+        skills: 0,
+        description: 0,
+      })
+  }
+
+  async getActive() {
+    return Vacancy.find({ active: true })
+      .sort([
+        ['priority', 'desc'],
+        ['name', 'asc'],
+      ])
+      .select({
+        _id: 1,
+        title: 1,
+        salary: 1,
+        updatedAt: 1,
+      })
   }
 
   async getOne(id) {
     if (!id) {
       throw new Error('не указан `id`')
     }
-    return await Vacancy.findById(id)
+    return Vacancy.findById(id).orFail()
+  }
+
+  async getDetails(id) {
+    if (!id) {
+      throw new Error('не указан `id`')
+    }
+    return Vacancy.findOne({ _id: id, active: true }).select({
+        active: 0,
+        version: 0,
+        priority: 0,
+        createdAt: 0,
+      })
+      .orFail()
   }
 
   async update(vacancy) {
@@ -32,14 +68,14 @@ class VacancyService {
     if (!id) {
       throw new Error('не указан `id`')
     }
-    return await Vacancy.findByIdAndDelete(id)
+    return Vacancy.findByIdAndDelete(id)
   }
 
   async setActive(id, active = true) {
     if (!id) {
       throw new Error('не указан `id`')
     }
-    return await Vacancy.findByIdAndUpdate(id, { active }, { new: true })
+    return Vacancy.findByIdAndUpdate(id, { active }, { new: true })
   }
 }
 
