@@ -19,7 +19,13 @@ const Vacancy = new mongoose.Schema(
 
 Vacancy.post('save', function (error, res, next) {
   if (error.name === 'MongoServerError' && error.code === 11000) {
+    // Ошибка контроля уникальности
     next({ message: { status: 'violations', violations: [{ code: error.code, message: 'Не дублируйте название вакансии!' }] } })
+  } else if (error.name === 'VersionError') {
+    // Ошибка контроля версии
+    next({
+      message: { status: 'violations', violations: [{ code: error.code, message: 'Конфликт изменений! Переоткройте вакансию или сделайте копию!' }] },
+    })
   } else {
     next()
   }
