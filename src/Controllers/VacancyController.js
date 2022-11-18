@@ -22,7 +22,7 @@ class VacancyController {
   async getActive(req, res, next) {
     try {
       const posts = await VacancyService.getActive()
-      return res.json(posts)
+      return res.json({ data: posts })
     } catch (e) {
       next(e)
     }
@@ -40,7 +40,7 @@ class VacancyController {
   async getDetails(req, res, next) {
     try {
       const post = await VacancyService.getDetails(req.body.id)
-      return res.json(post)
+      return res.json({ data: post })
     } catch (e) {
       next(e)
     }
