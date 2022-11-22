@@ -25,7 +25,8 @@ class VacancyService {
         ['name', 'asc'],
       ])
       .select({
-        _id: 1,
+        _id: 0,
+        id: '$_id',
         title: 1,
         salary: 1,
         updatedAt: 1,

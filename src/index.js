@@ -7,7 +7,7 @@ import ErrorMiddleware from './Middlewares/ErrorMiddleware.js'
 dotenv.config()
 
 const PORT = process.env.SERVER_PORT
-const DB_URL = `mongodb://${process.env.DB_HOST}/vacancies`
+const DB_URL = `mongodb://${process.env.DB_HOST}/hr`
 
 const app = express()
 
