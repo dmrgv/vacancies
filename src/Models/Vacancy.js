@@ -18,7 +18,6 @@ const Vacancy = new mongoose.Schema(
 )
 
 Vacancy.post('save', function (error, res, next) {
-  console.log('error: ', JSON.stringify(error))
   if (error.name === 'MongoServerError' && error.code === 11000) {
     // Ошибка контроля уникальности
     next({ message: { status: 'violations', violations: [{ code: error.code, message: 'Не дублируйте название вакансии!' }] } })
